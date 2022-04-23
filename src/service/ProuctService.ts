@@ -13,4 +13,10 @@ export default class ProductService {
 
     return result as Product[];
   };
+
+  create = async (product:Product):Promise<Product> => {
+    const result = await this.Model.create(product);
+
+    return result as Product;
+  };
 }

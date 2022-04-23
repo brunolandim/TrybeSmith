@@ -12,7 +12,17 @@ export default class ProductController {
     try {
       const result = await this.service.list();
     
-      res.status(200).json(result);
+      return res.status(200).json(result);
+    } catch (e) {
+      next(e);
+    }
+  };
+
+  create = async (req:Request, res:Response, next:NextFunction) => {
+    try {
+      const result = await this.service.create(req.body);
+    
+      return res.status(201).json({ item: result });
     } catch (e) {
       next(e);
     }

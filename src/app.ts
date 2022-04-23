@@ -1,12 +1,10 @@
 import express, { Express } from 'express';
-import ProductController from './controller/ProductController';
+import Products from './routes/products';
 
 const app:Express = express();
 
-const controllerProduct = new ProductController();
-
 app.use(express.json());
 
-app.get('/products', controllerProduct.list);
+app.use('/products', Products);
 
 export default app;
