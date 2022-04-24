@@ -2,14 +2,14 @@ import { IUser } from '../interfaces/interfaces';
 import UserModel from '../models/user';
 
 export default class UserService {
-  model: UserModel;
+  Model: UserModel;
 
   constructor() {
-    this.model = new UserModel();
+    this.Model = new UserModel();
   }
 
   create = async (user:IUser) => {
-    const result = await this.model.create(user);
+    const result = await this.Model.create(user);
 
     return result; 
   };
