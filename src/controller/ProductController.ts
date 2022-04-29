@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import ProductService from '../service/ProuctService';
+import ProductService from '../service/ProductService';
 
 export default class ProductController {
   public service:ProductService;

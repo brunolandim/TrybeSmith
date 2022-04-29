@@ -1,4 +1,4 @@
-import { RowDataPacket, Pool, ResultSetHeader } from 'mysql2/promise';
+import { RowDataPacket, Pool, ResultSetHeader, OkPacket } from 'mysql2/promise';
 import { Product } from '../interfaces/interfaces';
 import connection from './connection';
 
@@ -22,5 +22,10 @@ export default class ProductModel {
     const [result] = await connection.execute<ResultSetHeader>(query, [name, amount]);
   
     return { id: result.insertId, ...product };
+  };
+
+  update = async (orderId:number, productId:number):Promise<void> => {
+    const query = ' UPDATE Trybesmith.Products SET orderId = ? WHERE id = ?';
+    await this.connection.execute<OkPacket>(query, [orderId, productId]);
   };
 }

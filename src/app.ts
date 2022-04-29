@@ -1,5 +1,5 @@
 import express, { Express } from 'express';
-import Products from './routes/products';
+import Products from './routes/product';
 import User from './routes/user';
 import Order from './routes/order';
 import Login from './routes/login';

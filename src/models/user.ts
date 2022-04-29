@@ -1,5 +1,5 @@
 import { Pool, ResultSetHeader, RowDataPacket } from 'mysql2/promise';
-import { ILogin, IUser } from '../interfaces/interfaces';
+import { IUser } from '../interfaces/interfaces';
 import connection from './connection';
 
 export default class UserModel {
@@ -9,11 +9,18 @@ export default class UserModel {
     this.connection = connection;
   }
 
-  list = async ():Promise<ILogin[]> => {
-    const query = 'SELECT * FROM Trybesmith.Users';
-    const [result] = await this.connection.execute<RowDataPacket[]>(query);
+  list = async ():Promise<IUser[]> => {
+    const [result] = await this.connection.execute<RowDataPacket[]>(`
+    SELECT * FROM Trybesmith.Users;`);
     
-    return result as ILogin[];
+    return result as IUser[];
+  };
+
+  findUser = async (username:string):Promise<IUser[]> => {
+    const query = 'SELECT * FROM Trybesmith.Users WHERE username = ?';
+    const [result] = await this.connection.execute<RowDataPacket[]>(query, [username]);
+
+    return result as IUser[];
   };
 
   create = async (user:IUser):Promise<void> => {
